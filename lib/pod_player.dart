@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:butterfly/neu_box.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class SongPage extends StatefulWidget {
   const SongPage({Key? key}) : super(key: key);
@@ -19,6 +20,10 @@ class _SongPageState extends State<SongPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Column(children: [
+              const SizedBox(height: 10),
+
+              //Back button and  menu button
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -48,45 +53,109 @@ class _SongPageState extends State<SongPage> {
                       child: Image.network(
                           'https://images.unsplash.com/photo-1439902315629-cd882022cea0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'SnowBoy ☃☃☃',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.grey.shade700,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'SnowBoy',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.grey.shade700,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Marcel',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                              const SizedBox(
+                                height: 6,
                               ),
-                            )
-                          ],
-                        ),
-                        const Icon(
-                          Icons.favorite,
-                          color: Colors.red,
-                          size: 32,
-                        ),
-                      ],
+                              const Text(
+                                'Marcel',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              )
+                            ],
+                          ),
+                          const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                            size: 32,
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),
-              )
+              ),
+
+              const SizedBox(height: 30),
 
               //start time
 
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: const [
+                  Text('0:00'),
+                  Icon(Icons.shuffle),
+                  Icon(Icons.repeat),
+                  Text('4:22')
+                ],
+              ),
+
+              const SizedBox(height: 30),
+
               //linear progress bar
 
+              NeuBox(
+                child: LinearPercentIndicator(
+                  lineHeight: 10,
+                  percent: 0.8,
+                  progressColor: Colors.green,
+                  backgroundColor: Colors.transparent,
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
               //previous song, pause play, skip next song
+
+              SizedBox(
+                height: 80,
+                child: Row(
+                  children: const [
+                    Expanded(
+                      child: NeuBox(
+                          child: Icon(
+                        Icons.skip_previous,
+                        size: 32,
+                      )),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: NeuBox(
+                            child: Icon(
+                          Icons.play_arrow,
+                          size: 32,
+                        )),
+                      ),
+                    ),
+                    Expanded(
+                      child: NeuBox(
+                          child: Icon(
+                        Icons.skip_next,
+                        size: 32,
+                      )),
+                    ),
+                  ],
+                ),
+              )
             ]),
           ),
         ));
